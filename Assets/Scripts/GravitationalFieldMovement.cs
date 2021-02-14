@@ -14,19 +14,15 @@ public class GravitationalFieldMovement : MonoBehaviour {
     private float m_GravityConst;
     [SerializeField]
     private Vector3 m_TargetPosition;
-
-    private const float TOLERANCE = 0.5f;
+    
     private const float MAX_ACCELERATION_MAGTINUDE = 500f;
 
     private void Start() {
-        transform.Translate(m_StartPosition);
+        transform.position = m_StartPosition;
     }
     
     void FixedUpdate() {
-        float distance = (m_TargetPosition - transform.position).magnitude;
-        if (distance < TOLERANCE) {return;}
-
-        Vector3 accDirection = m_TargetPosition - m_StartPosition;
+        Vector3 accDirection = m_TargetPosition - transform.position;
         float reversedMagnitude = 1 / accDirection.magnitude;
         float accMagnitude = Math.Min(
             MAX_ACCELERATION_MAGTINUDE, 
