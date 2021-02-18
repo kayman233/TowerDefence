@@ -12,6 +12,10 @@ public class MovementAgent : MonoBehaviour
 
     private const float TOLERANCE = 0.1f;
 
+    private void OnValidate()
+    {
+        transform.position = m_Target;
+    }
     void Update()
     {
         float distance = (m_Target - transform.position).magnitude;
@@ -23,5 +27,10 @@ public class MovementAgent : MonoBehaviour
         Vector3 dir = (m_Target - transform.position).normalized;
         Vector3 delta = dir * (m_Speed * Time.deltaTime);
         transform.Translate(delta);
+    }
+
+    public void SetTarget(Vector3 target)
+    {
+        m_Target = target;
     }
 }
