@@ -38,6 +38,24 @@ namespace Field
             m_Cursor.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f) * m_NodeSize;
         }
 
+        private void Start()
+        {
+            m_Camera = Camera.main;
+
+            // Default plane size is 10 by 10
+            m_Width = m_GridWidth * m_NodeSize;
+            m_Height = m_GridHeight * m_NodeSize;
+            transform.localScale = new Vector3(
+                m_Width * 0.1f,
+                1f,
+                m_Height * 0.1f);
+            m_Offset = transform.position -
+                       (new Vector3(m_Width, 0f, m_Height) * 0.5f);
+
+            // for beauty
+            m_Cursor.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f) * m_NodeSize;
+        }
+
         private void Update()
         {
             if (m_Camera == null)
@@ -51,6 +69,11 @@ namespace Field
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
+                if (hit.transform != transform)
+                {
+                    m_Cursor.SetActive(false);
+                    return;
+                }
                 Vector3 hitPosition = hit.point;
                 Vector3 difference = hitPosition - m_Offset;
 
