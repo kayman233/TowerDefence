@@ -42,7 +42,8 @@ namespace Field
             m_Offset = transform.position - 
                        (new Vector3(width, 0f, height) * 0.5f);
             
-            m_Grid = new Grid(m_GridWidth, m_GridHeight,m_Offset, m_NodeSize, m_TargetCoordinate);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight,m_Offset, m_NodeSize,
+                m_StartCoordinate, m_TargetCoordinate);
         }
 
         private void Update()
@@ -71,9 +72,12 @@ namespace Field
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Node node = m_Grid.GetNode(x, y);
-                    node.isOccupied = !node.isOccupied;
-                    m_Grid.UpdatePathfinding();
+                    Vector2Int position = new Vector2Int(x, y);
+                    bool occupied = m_Grid.GetNode(position).IsOccupied;
+                    if (m_Grid.TryOccupyNode(position, !occupied))
+                    {
+                        m_Grid.UpdatePathfinding();
+                    }
                 }
             }
         }
@@ -89,17 +93,37 @@ namespace Field
             
             foreach (Node node in m_Grid.EnumerateAllNodes())
             {
+                
+                //------------- For checking Availability -----------
+                if (node.OccupationAvailability == OccupationAvailability.Undefined)
+                {
+                    Gizmos.color = Color.grey;
+                    Gizmos.DrawSphere(node.Position, 0.3f);
+                }
+                if (node.OccupationAvailability == OccupationAvailability.CanOccupy)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawSphere(node.Position, 0.3f);
+                }
+                if (node.OccupationAvailability == OccupationAvailability.CanNotOccupy)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(node.Position, 0.3f);
+                }
                 if (node.NextNode == null)
                 {
                     continue;
                 }
-
-                if (node.isOccupied)
+                //----------------------END--------------------------
+                
+                if (node.IsOccupied)
                 {
                     Gizmos.color = Color.black;
                     Gizmos.DrawSphere(node.Position, 0.5f);
                     continue;
                 }
+                //------------- For checking directions -------------
+                /*
                 Gizmos.color = Color.red;
                 Vector3 start = node.Position;
                 Vector3 end = node.NextNode.Position;
@@ -111,6 +135,8 @@ namespace Field
                 
                 Gizmos.DrawLine(start, end);
                 Gizmos.DrawSphere(end, 0.1f);
+                */
+                //----------------------END--------------------------
             }
         }
     }

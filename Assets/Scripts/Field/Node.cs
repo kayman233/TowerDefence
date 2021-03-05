@@ -12,7 +12,9 @@ namespace Field
         }
 
         public Node NextNode;
-        public bool isOccupied;
+        public bool IsOccupied;
+
+        public OccupationAvailability OccupationAvailability;
         
         public float PathWeight;
 
@@ -20,5 +22,12 @@ namespace Field
         {
             PathWeight = float.MaxValue;
         }
+    }
+    
+    public enum OccupationAvailability
+    {
+        CanOccupy,
+        CanNotOccupy,
+        Undefined
     }
 }

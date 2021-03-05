@@ -18,7 +18,7 @@ namespace Field
 
         public int Height => m_Height;
 
-        public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int target)
+        public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int start, Vector2Int target)
         {
             m_Width = width;
             m_Height = height;
@@ -30,11 +30,14 @@ namespace Field
                 for (int j = 0; j < m_Nodes.GetLength(1); j++)
                 {
                     m_Nodes[i, j] = new Node(offset + new Vector3(i + .5f, 0, j + .5f) * nodeSize);
+                    // default cache values
+                    m_Nodes[i, j].OccupationAvailability = OccupationAvailability.CanOccupy; 
                 }
             }
-
-            m_Pathfinding = new FlowFieldPathfinding(this, target);
+            GetNode(start).OccupationAvailability = OccupationAvailability.CanNotOccupy;
+            GetNode(target).OccupationAvailability = OccupationAvailability.CanNotOccupy;
             
+            m_Pathfinding = new FlowFieldPathfinding(this, start, target);
             m_Pathfinding.UpdateField();
         }
 
@@ -72,6 +75,27 @@ namespace Field
         public void UpdatePathfinding()
         {
             m_Pathfinding.UpdateField();
+        }
+
+        public bool TryOccupyNode(Vector2Int coordinate, bool occupy) // returns success of the operation 
+        {
+            Node node = GetNode(coordinate.x, coordinate.y);
+            if (!occupy || m_Pathfinding.CanOccupy(coordinate))
+            {
+                if (!node.IsOccupied)
+                {
+                    node.OccupationAvailability = OccupationAvailability.CanNotOccupy;
+                }
+                else
+                {
+                    node.OccupationAvailability = OccupationAvailability.CanOccupy;
+                    // clear cache in Path
+                    m_Pathfinding.clearPathCache();
+                }
+                node.IsOccupied = !node.IsOccupied;
+                return true;
+            }
+            return false;
         }
     }
 }
