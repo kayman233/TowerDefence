@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using Field;
 using UnityEngine;
-using Grid = Field.Grid;
 
-namespace Unit
+
+namespace Enemy
 {
-    public class UnitSpawner : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour
+
     {
-        [SerializeField] private GridMovementAgent m_MovementAgent;
-        [SerializeField] private GridHolder m_GridHolder;
+        [SerializeField]
+        private GridMovementAgent m_MovementAgent;
+        [SerializeField]
+        private GridHolder m_GridHolder;
 
         private void Awake()
         {
@@ -25,7 +27,7 @@ namespace Unit
                 SpawnUnit();
             }
         }
-        
+
         private void SpawnUnit()
         {
             Node startNode = m_GridHolder.Grid.GetNode(m_GridHolder.StartCoordinate);
