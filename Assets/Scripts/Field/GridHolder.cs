@@ -90,7 +90,7 @@ namespace Field
                 int y = (int) (difference.z / m_NodeSize);
 
                 m_Grid.SelectCoordinate(new Vector2Int(x, y));
-                /*
+                
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector2Int position = new Vector2Int(x, y);
@@ -100,7 +100,7 @@ namespace Field
                         m_Grid.UpdatePathfinding();
                     }
                 }
-                */
+                
             }
             else
             {
@@ -119,7 +119,7 @@ namespace Field
             
             foreach (Node node in m_Grid.EnumerateAllNodes())
             {
-                
+                /*
                 //------------- For checking Availability -----------
                 if (node.OccupationAvailability == OccupationAvailability.Undefined)
                 {
@@ -141,7 +141,7 @@ namespace Field
                     continue;
                 }
                 //----------------------END--------------------------
-                
+                */
                 if (node.IsOccupied)
                 {
                     Gizmos.color = Color.black;

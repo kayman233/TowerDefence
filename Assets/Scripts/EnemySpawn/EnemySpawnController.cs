@@ -42,7 +42,7 @@ namespace EnemySpawn
                 {
                     if (passedTime >= timeToSpawn && m_PassedTimeAtPreviousFrame < timeToSpawn)
                     {
-                        SpawnEnevy(wave.EnemyAsset);
+                        SpawnEnemy(wave.EnemyAsset);
                     }
 
                     if (i < wave.Count - 1)
@@ -55,10 +55,13 @@ namespace EnemySpawn
             m_PassedTimeAtPreviousFrame = passedTime;
         }
 
-        private void SpawnEnevy(EnemyAsset asset)
+        private void SpawnEnemy(EnemyAsset asset)
         {
             EnemyView view = Object.Instantiate(asset.ViewPrefab);
-            view.transform.position = m_Grid.GetStartNode().Position;
+            Vector3 position = m_Grid.GetStartNode().Position;
+            position.y = view.transform.position.y;
+            view.transform.position = position;
+            
             EnemyData data = new EnemyData(asset);
             
             data.AttachView(view);
