@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Enemy;
+using UnityEngine;
 
 namespace Field
 {
     public class Node
     {
         public Vector3 Position;
+        public List<EnemyData> EnemyDatas;
 
         public Node(Vector3 position)
         {
