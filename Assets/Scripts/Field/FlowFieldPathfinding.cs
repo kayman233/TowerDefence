@@ -147,9 +147,8 @@ namespace Field
             return !m_Grid.GetNode(newCoordinate).IsOccupied;
         }
 
-        public bool CanOccupy(Vector2Int coordinate)
+        public bool CanOccupy(Node node)
         {
-            Node node = m_Grid.GetNode(coordinate);
             if (node.OccupationAvailability == OccupationAvailability.CanOccupy)
             {
                 return true;

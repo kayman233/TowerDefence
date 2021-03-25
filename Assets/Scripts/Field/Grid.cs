@@ -118,7 +118,12 @@ namespace Field
         public bool TryOccupyNode(Vector2Int coordinate, bool occupy) // returns success of the operation 
         {
             Node node = GetNode(coordinate.x, coordinate.y);
-            if (!occupy || m_Pathfinding.CanOccupy(coordinate))
+            return TryOccupyNode(node, occupy);
+        }
+        
+        public bool TryOccupyNode(Node node, bool occupy) // returns success of the operation 
+        {
+            if (!occupy || m_Pathfinding.CanOccupy(node))
             {
                 if (!node.IsOccupied)
                 {
@@ -134,6 +139,11 @@ namespace Field
                 return true;
             }
             return false;
+        }
+
+        public bool CanOccupy(Node node)
+        {
+            return m_Pathfinding.CanOccupy(node);
         }
     }
 }
