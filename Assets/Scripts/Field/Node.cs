@@ -7,7 +7,7 @@ namespace Field
     public class Node
     {
         public Vector3 Position;
-        public List<EnemyData> EnemyDatas;
+        public List<EnemyData> EnemyDatas = new List<EnemyData>();
 
         public Node(Vector3 position)
         {

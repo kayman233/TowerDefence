@@ -17,6 +17,9 @@ namespace Enemy
             m_Data = data;
             
             SetTargetNode(grid.GetTargetNode());
+            
+            Node node = Game.Player.Grid.GetNodeAtPoint(transform.position);
+            node.EnemyDatas.Add(m_Data);
         }
 
         private const float TOLERANCE = 0.1f;
@@ -46,7 +49,7 @@ namespace Enemy
             m_Transform.Translate(delta);
             Node currentNode = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
             
-            if (previousNode.Position != currentNode.Position)
+            if (previousNode != currentNode)
             {
                 previousNode.EnemyDatas.Remove(m_Data);
                 currentNode.EnemyDatas.Add(m_Data);

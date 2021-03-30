@@ -1,4 +1,6 @@
-﻿using Assets;
+﻿using System.Collections;
+using Assets;
+using UnityEngine;
 
 namespace Enemy
 {
@@ -6,11 +8,13 @@ namespace Enemy
     {
         private EnemyView m_View;
         public readonly EnemyAsset m_Asset;
+        private int m_Health;
 
         public EnemyView View => m_View;
 
         public EnemyData(EnemyAsset asset)
         {
+            m_Health = asset.StartHealth;
             m_Asset = asset;
         }
 
@@ -18,6 +22,20 @@ namespace Enemy
         {
             m_View = view;
             m_View.AttachData(this);
+        }
+
+        public void GetDamage(int damage)
+        {
+            m_Health -= damage;
+            if (m_Health < 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            Debug.Log("Die");
         }
     }
 }

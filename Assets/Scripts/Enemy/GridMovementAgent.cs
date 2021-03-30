@@ -17,10 +17,10 @@ namespace Enemy
             m_Transform = transform;
             m_Data = data;
             
+            SetTargetNode(grid.GetStartNode());
+            
             Node node = Game.Player.Grid.GetNodeAtPoint(transform.position);
             node.EnemyDatas.Add(m_Data);
-            
-            SetTargetNode(grid.GetStartNode());
         }
 
         private const float TOLERANCE = 0.1f;
@@ -41,16 +41,15 @@ namespace Enemy
                 m_TargetNode = m_TargetNode.NextNode;
                 return;
             }
-
-            Vector3 position = m_Transform.position;
-            Vector3 dir = (target - position).normalized;
+            
+            Vector3 dir = (target - m_Transform.position).normalized;
             Vector3 delta = dir * (m_Speed * Time.deltaTime);
             
-            Node previousNode = Game.Player.Grid.GetNodeAtPoint(position);
+            Node previousNode = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
             m_Transform.Translate(delta);
             Node currentNode = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
 
-            if (previousNode.Position != currentNode.Position)
+            if (previousNode != currentNode)
             {
                 previousNode.EnemyDatas.Remove(m_Data);
                 currentNode.EnemyDatas.Add(m_Data);

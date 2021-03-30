@@ -154,7 +154,6 @@ namespace Field
 
             int x = (int) (difference.x / m_NodeSize);
             int y = (int) (difference.z / m_NodeSize);
-
             return GetNode(x, y);
         }
 
