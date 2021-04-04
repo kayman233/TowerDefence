@@ -8,7 +8,7 @@ namespace Enemy
     {
         private EnemyView m_View;
         public readonly EnemyAsset m_Asset;
-        private int m_Health;
+        private float m_Health;
 
         public EnemyView View => m_View;
 
@@ -24,7 +24,7 @@ namespace Enemy
             m_View.AttachData(this);
         }
 
-        public void GetDamage(int damage)
+        public void GetDamage(float damage)
         {
             m_Health -= damage;
             if (m_Health < 0)
