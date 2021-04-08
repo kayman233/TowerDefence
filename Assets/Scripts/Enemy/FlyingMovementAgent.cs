@@ -55,6 +55,12 @@ namespace Enemy
                 currentNode.EnemyDatas.Add(m_Data);
             } 
         }
+        
+        public void Die()
+        {
+            Node node = Game.Player.Grid.GetNodeAtPoint(m_Transform.position);
+            node.EnemyDatas.Remove(m_Data);
+        }
 
         private void SetTargetNode(Node node)
         {
