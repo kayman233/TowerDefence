@@ -17,7 +17,7 @@ namespace Turret.Weapon.Field
         private GameObject m_Field;
         
         private float m_MaxDistance;
-        private int m_Damage = 10; // per second
+        private float m_Damage; // per second
 
         private List<Node> m_ReachableNodes;
 
@@ -25,6 +25,7 @@ namespace Turret.Weapon.Field
         {
             m_Asset = asset;
             m_View = view;
+            m_Damage = m_Asset.Damage;
             m_MaxDistance = m_Asset.MaxDistance;
             m_ReachableNodes = Game.Player.Grid.GetNodesInCircle(m_View.ProjectileOrigin.position, m_MaxDistance);
             m_Field = Object.Instantiate(asset.FieldPrefab, m_View.transform.position, Quaternion.identity);

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Flying Enemy Asset
   m_EditorClassIdentifier: 
   StartHealth: 50
+  Speed: 2
   IsFlyingEnemy: 1
   ViewPrefab: {fileID: -5508145241232831360, guid: 31e44e811fd469b49a5434e0805ed211, type: 3}

@@ -19,13 +19,13 @@ namespace Enemy
 
         public void CreateMovementAgent(Grid grid)
         {
-            if (m_Data.m_Asset.IsFlyingEnemy)
+            if (m_Data.Asset.IsFlyingEnemy)
             {
-                m_MovementAgent = new FlyingMovementAgent(5f, transform, grid, m_Data);
+                m_MovementAgent = new FlyingMovementAgent(m_Data.Asset.Speed, transform, grid, m_Data);
             }
             else
             {
-                m_MovementAgent = new GridMovementAgent(5f, transform, grid, m_Data);
+                m_MovementAgent = new GridMovementAgent(m_Data.Asset.Speed, transform, grid, m_Data);
             }
             
         }

@@ -8,11 +8,17 @@ namespace Turret.Weapon.Projectile.Rocket
 {
     public class RocketProjectile: MonoBehaviour, IProjectile
     {
-        private float m_Speed = 10f;
-        private int m_Damage = 5;
+        private float m_Speed;
+        private float m_Damage;
         private float m_DamageRadius = 2f;
         private bool m_DidHit = false;
         private EnemyData m_Target;
+        
+        public void SetAsset(RocketProjectileAsset rocketProjectileAsset)
+        {
+            m_Speed = rocketProjectileAsset.Speed;
+            m_Damage = rocketProjectileAsset.Damage;
+        }
         
         public void TickApproaching()
         {

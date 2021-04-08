@@ -7,7 +7,7 @@ namespace Turret.Weapon.Field
     public class TurretFieldWeaponAsset: TurretWeaponAssetBase
     {
         public float MaxDistance;
-
+        public float Damage;
         public GameObject FieldPrefab;
 
         public override ITurretWeapon GetWeapon(TurretView view)

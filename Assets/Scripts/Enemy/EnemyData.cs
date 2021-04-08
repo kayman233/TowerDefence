@@ -7,10 +7,11 @@ namespace Enemy
     public class EnemyData
     {
         private EnemyView m_View;
-        public readonly EnemyAsset m_Asset;
+        private EnemyAsset m_Asset;
         private float m_Health;
 
         public EnemyView View => m_View;
+        public EnemyAsset Asset => m_Asset;
 
         public EnemyData(EnemyAsset asset)
         {
