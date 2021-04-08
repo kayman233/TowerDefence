@@ -7,6 +7,11 @@ namespace Enemy
     {
         private EnemyData m_Data;
         private IMovementAgent m_MovementAgent;
+        
+        [SerializeField]
+        private Animator m_Animator;
+        private static readonly int DieAnimationIndex = Animator.StringToHash("Died");
+        public float delay = 0.5f;
 
         public EnemyData Data => m_Data;
 
@@ -28,6 +33,12 @@ namespace Enemy
                 m_MovementAgent = new GridMovementAgent(m_Data.Asset.Speed, transform, grid, m_Data);
             }
             
+        }
+        
+        public void AnimateDie()
+        {
+            m_Animator.SetTrigger(DieAnimationIndex);
+            Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
         }
     }
 }

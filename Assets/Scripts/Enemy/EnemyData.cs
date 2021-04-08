@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Assets;
+using Runtime;
 using UnityEngine;
 
 namespace Enemy
@@ -36,7 +37,9 @@ namespace Enemy
 
         private void Die()
         {
-            Debug.Log("Die");
+            m_View.AnimateDie();
+            Game.Player.EnemyDied(this);
+            m_View.MovementAgent.Die();
         }
     }
 }
