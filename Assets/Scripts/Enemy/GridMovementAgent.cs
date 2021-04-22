@@ -62,6 +62,11 @@ namespace Enemy
             node.EnemyDatas.Remove(m_Data);
         }
 
+        public Node GetCurrentNode()
+        {
+            return m_TargetNode;
+        }
+
         private void SetTargetNode(Node node)
         {
             m_TargetNode = node;

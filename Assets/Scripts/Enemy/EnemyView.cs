@@ -40,5 +40,10 @@ namespace Enemy
             m_Animator.SetTrigger(DieAnimationIndex);
             Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
         }
+
+        public void ReachedTarget()
+        {
+            Destroy(gameObject);
+        }
     }
 }
